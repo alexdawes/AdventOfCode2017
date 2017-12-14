@@ -30,26 +30,8 @@ def run_round(arr, lengths, position, skip):
     return arr, position, skip
 
  
-
-
-if __name__ == '__main__':
-    with open('input_10.txt') as f:
-        content = f.read()
-
-    input = [int(i) for i in content.split(',')]
-
-    arr = list(range(0,256))
-    skip = 0
-    position = 0
-    
-    arr, position, skip = run_round(arr, input, position, skip)
-
-    print('Part 1:', arr[0] * arr[1])
-
-
-    input = [ord(i) for i in content.strip()]
-
-    lengths = input + [17, 31, 73, 47, 23]
+def hash(s):
+    lengths = [ord(i) for i in s.strip()] + [17, 31, 73, 47, 23]
 
     arr = list(range(0,256))
     skip = 0
@@ -66,8 +48,22 @@ if __name__ == '__main__':
     hex_strs = [hex(i) for i in dense]
     hex_codes = [h[2:] if len(h) == 4 else '0' + h[2] for h in hex_strs]
     hash = ''.join(hex_codes)
+    return hash
 
-    print('Part 2:', hash)
+if __name__ == '__main__':
+    with open('input_10.txt') as f:
+        content = f.read()
+
+    input = [int(i) for i in content.split(',')]
+
+    arr = list(range(0,256))
+    skip = 0
+    position = 0
+    arr, position, skip = run_round(arr, input, position, skip)
+
+    print('Part 1:', arr[0] * arr[1])
+
+    print('Part 2:', hash(content))
 
 
 
