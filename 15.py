@@ -25,13 +25,14 @@ def generate_2_2(seed):
             return seed
 
 def check(n1, n2):
-    bin_1 = bin(n1)[2:]
-    bin_2 = bin(n2)[2:]
-    bin_1 = bin_1 if len(bin_1) >= 16 else ''.join(['0' for i in range(16-len(bin_1))] + [b for b in bin_1])
-    bin_2 = bin_2 if len(bin_2) >= 16 else ''.join(['0' for i in range(16-len(bin_2))] + [b for b in bin_2])
-    s_1 = bin_1[-16:]
-    s_2 = bin_2[-16:]
-    return s_1 == s_2
+    # bin_1 = bin(n1)[2:]
+    # bin_2 = bin(n2)[2:]
+    # bin_1 = bin_1 if len(bin_1) >= 16 else ''.join(['0' for i in range(16-len(bin_1))] + [b for b in bin_1])
+    # bin_2 = bin_2 if len(bin_2) >= 16 else ''.join(['0' for i in range(16-len(bin_2))] + [b for b in bin_2])
+    # s_1 = bin_1[-16:]
+    # s_2 = bin_2[-16:]
+    # return s_1 == s_2
+    return n1 % 65536 == n2 % 65536
 
 
 if __name__ == '__main__':
@@ -41,17 +42,17 @@ if __name__ == '__main__':
     lines = [c.strip() for c in content]
     input_1, input_2 = parse_inputs(lines)
 
-    # val_1 = input_1
-    # val_2 = input_2
-    # count = 0
+    val_1 = input_1
+    val_2 = input_2
+    count = 0
 
-    # for i in range(40000000):
-    #     val_1 = generate_1(val_1)
-    #     val_2 = generate_2(val_2)
-    #     if check(val_1, val_2):
-    #         count += 1
+    for i in range(40000000):
+        val_1 = generate_1(val_1)
+        val_2 = generate_2(val_2)
+        if check(val_1, val_2):
+            count += 1
 
-    # print('Part 1:', count)
+    print('Part 1:', count)
 
     val_1 = input_1
     val_2 = input_2
