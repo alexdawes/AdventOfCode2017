@@ -64,28 +64,19 @@ class Program(object):
             self.index += 1
         
     def set(self, key, value):
-        val = get_value(self.registry, value)
-        if not is_int(val): 
-            print('SET',key,value, self.registry)
-        self.registry[key] = val
+        self.registry[key] = get_value(self.registry, value)
         self.index += 1
 
     def add(self, key, value):
-        val = get_value(self.registry, value)
-        if not is_int(val): print('ADD',key,value)
-        self.registry[key] += val
+        self.registry[key] += get_value(self.registry, value)
         self.index += 1
 
     def mul(self, key, value):
-        val = get_value(self.registry, value)
-        if not is_int(val): print('MUL',key,value)
-        self.registry[key] *= val
+        self.registry[key] *= get_value(self.registry, value)
         self.index += 1
         
     def mod(self, key, value):
-        val = get_value(self.registry, value)
-        if not is_int(val): print('MOD',key,value)
-        self.registry[key] %= val
+        self.registry[key] %= get_value(self.registry, value)
         self.index += 1
 
     def jgz(self, key, value):
