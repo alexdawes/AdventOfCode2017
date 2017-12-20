@@ -1,4 +1,5 @@
 import re
+import math
 
 class Vector(object):
     def __init__(self, x, y, z):
@@ -19,6 +20,9 @@ class Vector(object):
 
     def norm(self):
         return abs(self.x) + abs(self.y) + abs(self.z)
+
+    def norm2(self):
+        return math.sqrt(self.x*self.x + self.y*self.y + self.z*self.z)
 
 class Particle(object):
     def __init__(self, id, pos, vel, acc):
@@ -58,8 +62,8 @@ if __name__ == '__main__':
     sorted_by_abs_acc = sorted(particles, key=lambda p: p.acceleration.norm())
     print('Part 1:', sorted_by_abs_acc[0].id)
 
-    for x in range(100):
-    #while True:
+    counter = 0
+    while True:
         for p in particles:
             p.tick()
 
@@ -76,10 +80,12 @@ if __name__ == '__main__':
         for p in to_destroy:
             particles.remove(p)
 
-        sorted_by_abs_acc = sorted(particles, key=lambda p: p.acceleration.norm())
-        sorted_by_abs_pos = sorted(particles, key=lambda p: p.position.norm())
+        sorted_by_abs_acc = [p.id for p in sorted(particles, key=lambda p: (p.acceleration.norm(), p.velocity.norm(), p.position.norm(), p.id))]
+        sorted_by_abs_vel = [p.id for p in sorted(particles, key=lambda p: (p.velocity.norm(), p.position.norm(), p.id))]
+        sorted_by_abs_pos = [p.id for p in sorted(particles, key=lambda p: (p.position.norm(), p.id))]
 
-        if sorted_by_abs_acc == sorted_by_abs_pos:
+        counter += 1
+        if sorted_by_abs_acc == sorted_by_abs_pos and sorted_by_abs_acc == sorted_by_abs_vel:
             break
     
     print('Part 2:', len(particles))
