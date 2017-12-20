@@ -84,7 +84,6 @@ if __name__ == '__main__':
         sorted_by_abs_vel = [p.id for p in sorted(particles, key=lambda p: (p.velocity.norm(), p.position.norm(), p.id))]
         sorted_by_abs_pos = [p.id for p in sorted(particles, key=lambda p: (p.position.norm(), p.id))]
 
-        counter += 1
         if sorted_by_abs_acc == sorted_by_abs_pos and sorted_by_abs_acc == sorted_by_abs_vel:
             break
     
