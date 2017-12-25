@@ -1,6 +1,5 @@
 import re
 
-
 class Core(object):
     def __init__(self, state):
         self.tape = [0]
